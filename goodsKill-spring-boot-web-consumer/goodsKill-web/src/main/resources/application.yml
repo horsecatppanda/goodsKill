@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: dev
+  application:
+    name: goodskill-web
   session:
     redis:
       flush-mode: on_save
@@ -49,8 +51,12 @@ dubbo:
     id: dubbo
     name: dubbo
     port: -1
+  provider:
+    filter: tracing
   consumer:
     timeout: 30000
+    filter: tracing
+
   ## 此处有坑，如配置了具体的service名，对应的注入此service上的注解@Reference(check=false)会失效
   cloud:
     subscribed-services: "goodskill-service-provider"

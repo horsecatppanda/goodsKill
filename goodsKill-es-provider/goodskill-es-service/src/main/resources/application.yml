@@ -33,6 +33,10 @@ dubbo:
     base-packages: com.goodskill.es.service
   cloud:
     subscribed-services: "*"
+  provider:
+    filter: tracing
+  consumer:
+    filter: tracing
 ## 日志级别
 logging:
   level:

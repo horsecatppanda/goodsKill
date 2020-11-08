@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.goodskill.es.api.EsSearchService;
 import com.goodskill.mongo.api.SuccessKilledMongoService;
 import com.goodskill.mongo.entity.SuccessKilledDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.seckill.api.constant.SeckillStatusConstant;
 import org.seckill.api.dto.*;
@@ -86,9 +88,14 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
     private JmsTemplate jmsTemplate;
     @Value("${alipay.qrcodeImagePath:1}")
     private String qrcodeImagePath;
+    @Reference
+    private EsSearchService esSearchService;
+
 
     @Override
     public PageInfo getSeckillList(int pageNum, int pageSize, String goodsName) {
+        esSearchService.searchWithNameByPage(null);
+
         String key = "seckill:list:" + pageNum + ":" + pageSize + ":" + goodsName;
         List list = (List) redisTemplate.opsForValue().get(key);
         if (CollectionUtils.isEmpty(list)) {

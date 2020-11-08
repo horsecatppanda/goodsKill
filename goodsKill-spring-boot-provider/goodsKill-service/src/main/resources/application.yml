@@ -75,6 +75,9 @@ dubbo:
     id: my-registry
   provider:
     timeout: 30000
+    filter: tracing
+  consumer:
+    filter: tracing
   ## 此处有坑，如配置了具体的service名，对应的注入此service上的注解@Reference(check=false)会失效
   cloud:
     subscribed-services: "*"

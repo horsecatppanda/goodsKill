@@ -19,7 +19,8 @@ import org.springframework.context.annotation.ImportResource;
  * @author heng
  */
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, ActiveMQAutoConfiguration.class})
-@ImportResource(value = {"classpath*:META-INF/spring/spring-web.xml", "classpath*:META-INF/spring/spring-shiro-web.xml"})
+@ImportResource(value = {"classpath*:META-INF/spring/spring-web.xml",
+        "classpath*:META-INF/spring/spring-shiro-web.xml", "classpath*:META-INF/spring/dubbo-zipkin.xml"})
 @EnableBinding(value = {Source.class})
 @EnableDiscoveryClient
 @EnableFeignClients("com.goodskill.*.api")

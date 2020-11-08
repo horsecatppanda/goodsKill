@@ -19,7 +19,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, ActiveMQAutoConfiguration.class,
         GkActivemqAutoConfiguration.class})
 @ImportResource(value = {
-        "classpath*:META-INF/spring/spring-dao.xml"})
+        "classpath*:META-INF/spring/spring-dao.xml",
+        "classpath*:META-INF/spring/dubbo-zipkin.xml"})
 @EnableTransactionManagement
 @MapperScan("org.seckill.mp.dao.mapper")
 @EnableDiscoveryClient
